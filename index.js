@@ -82,5 +82,9 @@ Sapp.get('/tia/:id', (req, res) => {
     res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // Return json
 })
 
+
 app.listen(80);
 Sapp.listen(443);
+
+console.log("Listening on port 80")
+console.log("Listening on port 443")
