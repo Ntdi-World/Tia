@@ -18,10 +18,22 @@ fs.readdir(directoryPath, function (err, files) {
     pic = files;
 });
 
-// Create express route for root at /tia
+// Create express route at /tia
 app.get('/tia', (req, res) => {
     res.setHeader('Content-Type', 'application/json'); // Respond with json
     num = Math.floor(Math.random()*pic.length);
+    geture = url + pic[num]; // get random tia pic out of folder
+    res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // return json
+})
+
+// Create express route at /tia/:id to get sdpecific tia pic
+app.get('/tia/:id', (req, res) => {
+    res.setHeader('Content-Type', 'application/json'); // Respond with json
+    num = parseInt(req.params.id);
+    if (num > pic.length - 1) {
+        res.sendStatus(404);
+        return;
+    }
     geture = url + pic[num]; // get random tia pic out of folder
     res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // return json
 })
