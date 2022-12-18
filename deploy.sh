@@ -2,4 +2,4 @@
 
 git pull
 
-node .
+node src/index.js
