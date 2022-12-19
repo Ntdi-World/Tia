@@ -93,5 +93,11 @@ body {
     .copyright {
         font-size: 0.8rem;
     }
+
+    .footer {
+        position: relative !important;
+        display: flex;
+        justify-content: center;
+    }
 }
  

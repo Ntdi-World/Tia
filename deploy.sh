@@ -1,8 +1,6 @@
 #!/bin/bash
 
-git pull
-
-chmod u+x ./deploy.sh
+git pulld
 
 pm2 delete 0
 
