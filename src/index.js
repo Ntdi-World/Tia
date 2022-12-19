@@ -6,7 +6,7 @@ const express = require('express')
 const app = express();
 
 let pic;
-const url = "https://raw.githubusercontent.com/n-tdi/Tia/main/pic/";
+const url = "https://raw.githubusercontent.com/n-tdi/Tia/main/src/pic/";
 
 // Passsing directoryPath and callback function
 fs.readdir(directoryPath, function (err, files) {
@@ -23,10 +23,14 @@ function isNumeric(str) {
     if (typeof str != "string") return false // we only process strings!  
     return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
            !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-}
+} 
 
+app.engine('pug', require('pug').__express)
+app.set('view engine', 'pug');
+app.set('views', './views');
+ 
 // Create express route at /tia
-app.get('/tia', (req, res) => {
+app.get('/purr', (req, res) => {
     res.setHeader('Content-Type', 'application/json'); // Respond with json
     num = Math.floor(Math.random()*pic.length);
     geture = url + pic[num]; // Get random tia pic out of folder
@@ -34,7 +38,7 @@ app.get('/tia', (req, res) => {
 })
 
 // Create express route at /tia/:id to get sdpecific tia pic
-app.get('/tia/:id', (req, res) => {
+app.get('/purr/:id', (req, res) => {
     res.setHeader('Content-Type', 'application/json'); // Respond with json
     
     if (!isNumeric(req.params.id)) { // Check if the suppyled id is a numeric value
@@ -53,6 +57,15 @@ app.get('/tia/:id', (req, res) => {
     res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // Return json
 })
 
+
+app.get('/', function(req, res) {
+    rand = Math.floor(Math.random()*pic.length)
+    res.render('first_view', {
+        howmany: pic.length,
+        num: rand,
+        random: url + pic[rand]
+    });
+})
 
 
 app.listen(4000);
