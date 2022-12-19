@@ -73,3 +73,25 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .viewcontainer {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .info {
+        margin-bottom: 2rem !important;
+        font-size: 1.5rem !important;
+    }
+
+    .picture {
+        width: 300px !important;
+    }
+
+    .copyright {
+        font-size: 0.8rem;
+    }
+}
+ 
