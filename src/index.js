@@ -3,8 +3,7 @@ const fs = require('fs');
 // Joining path of directory 
 const directoryPath = path.join(__dirname, 'pic');
 const express = require('express')
-const app = express()
-const Sapp = express();
+const app = express();
 
 let pic;
 const url = "https://raw.githubusercontent.com/n-tdi/Tia/main/pic/";
@@ -34,14 +33,6 @@ app.get('/tia', (req, res) => {
     res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // Return json
 })
 
-// Create SECURE express route at /tia
-Sapp.get('/tia', (req, res) => {
-    res.setHeader('Content-Type', 'application/json'); // Respond with json
-    num = Math.floor(Math.random()*pic.length);
-    geture = url + pic[num]; // Get random tia pic out of folder
-    res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // Return json
-})
-
 // Create express route at /tia/:id to get sdpecific tia pic
 app.get('/tia/:id', (req, res) => {
     res.setHeader('Content-Type', 'application/json'); // Respond with json
@@ -62,25 +53,6 @@ app.get('/tia/:id', (req, res) => {
     res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // Return json
 })
 
-// Create SECURE express route at /tia/:id to get sdpecific tia pic
-Sapp.get('/tia/:id', (req, res) => {
-    res.setHeader('Content-Type', 'application/json'); // Respond with json
-    
-    if (!isNumeric(req.params.id)) { // Check if the suppyled id is a numeric value
-        res.sendStatus(400); // Send a bad request error code
-        return; // Stop the request
-    }
-
-    num = parseInt(req.params.id); // Parse the reqest as an int. Probably will cause issues with strings :)
-    
-    if (num > pic.length - 1) { // If the supplyed int is not a valid tia pic, return 404
-        res.sendStatus(404); // Send a not found error code
-        return; // Stop the request
-    }
-
-    geture = url + pic[num]; // Get random tia pic out of folder
-    res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // Return json
-})
 
 
 app.listen(4000);
