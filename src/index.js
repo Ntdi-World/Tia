@@ -57,7 +57,7 @@ app.get('/purr/:id', (req, res) => {
     res.end(JSON.stringify({ id: num, picture: geture }, null, 3)); // Return json
 })
 
-
+// https://tia.ntdi.world
 app.get('/', function(req, res) {
     rand = Math.floor(Math.random()*pic.length)
     res.render('first_view', {
